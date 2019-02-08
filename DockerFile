@@ -1,5 +1,7 @@
 FROM node:carbon
 
+RUN npm install -g nodemon
+
 # Установить зависимости приложения
 # Используется символ подстановки для копирования как package.json, так и package-lock.json,
 # работает с npm@5+
@@ -13,4 +15,4 @@ RUN npm install
 COPY ./ ./
 
 EXPOSE 3000
-CMD [ "node", "index.js" ]
+CMD [ "nodemon", "index.js" ]
