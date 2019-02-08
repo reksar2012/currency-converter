@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> #{title} </title>
+    meta(charset="utf-8")
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css', integrity='sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS', crossorigin='anonymous')
+    link(rel='stylesheet', href='../animate.min.css')
+    link(rel='stylesheet', href='../button.css')
+    script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js', integrity='sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut', crossorigin='anonymous')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js', integrity='sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k', crossorigin='anonymous')
+    <style>
+        
+    </style>
+<head>
+body.bg-dark.text-light.d-flex.flex-column(style="min-height:100vh")
+    nav.navbar.navbar-dark.bg-dark
+        a.navbar-brand(href="#")
+            img.d-inline-block.align-top(src="https://lh6.ggpht.com/rov-Bt7zcomCyX7EaPwm5ppYBX2ZJrkVC3hQib-mW7vjvG-xlgK4G6KO9oegt80Gq5aX",width="30",height="30",alt="")
+            |Currency Converter
+    .container.flex-fill.d-flex.align-content-center.justify-content-center.flex-wrap
+        .row(style="width: 100%!important")
+            .col-sm-6.col-12.offset-sm-2.offset-md-0.offset-0.justify-content-center.justify-content-sm-start
+                image.d-block.d-sm-none.money(src="http://www.clipartbest.com/cliparts/aie/XXE/aieXXERzT.png")
+                image.d-none.d-sm-block(src="http://www.clipartbest.com/cliparts/aie/XXE/aieXXERzT.png" height="325px" width="auto" style="float: right;")
+            .col-sm-4
+                form#form(action="")
+                    if(res.defaultResponse)
+                        .form-group
+                            label(for="ammount") Ammount
+                            input.form-control#ammount(type="text", placeholder="1")                    
+                        .form-group
+                            label(for="from") From
+                            select.form-control#from
+                                each val,index in res.list
+                                    option(value=index) #{index} - #{val}
+                        .form-group
+                            label(for="to") To
+                            select.form-control#to
+                                each val,index in res.list
+                                    option(value=index) #{index} - #{val} 
+                    if(!res.defaultResponse)
+                        .form-group
+                            label(for="ammount") Ammount
+                            input.form-control#ammount(type="text", value=res.prevState.ammount, placeholder="1")                    
+                        .form-group
+                            label(for="from") From
+                            select.form-control#from(selected=res.prevState.from)
+                                each val,index in res.list
+                                    option #{index}
+                        .form-group
+                            label(for="to") To
+                            select.form-control#to(selected=res.prevState.to)
+                                each val,index in res.list
+                                    option #{index}
+                    .form-group
+                        button.btn.btn-lg.btn-success.mt-3(type="button", value="GetData", onClick="SendData()")
+                            span CONVERT
+        if(!res.defaultResponse)
+            .row.justify-content-center.mt-4.p-5.mb-5.bg-light.text-dark.bounceInUp.animated #{res.response}
+        .row
+    .footer
+        .col-xs-12.col-sm-12.col-md-12.mt-2.mt-sm-2.text-center.text-white
+            p.h6 &copy All right Reversed.
+                a.text-green.ml-2(href="https://Sstenchev.com", target="_blank") reksar2012 
+                |#{ (new Date()).getFullYear()}
+                    
+            
+script.
+    function SendData(){
+        var url = `http://localhost:3000?from=${$("#from").val()}&to=${$("#to").val()}&ammount=${$("#ammount").val()}`;
+        $(location).attr('href', url)
+    }
+</html>
