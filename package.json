@@ -4,7 +4,8 @@
   "main": "./server/index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node ./server/index.js"
+    "start": "node ./server/index.js",
+    "prettier": "prettier --write *.js"
   },
   "dependencies": {
     "animate.css": "3.7.0",
